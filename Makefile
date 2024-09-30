@@ -4,6 +4,12 @@ PYTHON = $(PYTHON_ENV)/bin/python
 PIP = $(PYTHON_ENV)/bin/pip
 NPM = npm
 
+# If on Windows, use 'Scripts' instead of 'bin'
+ifeq ($(OS),Windows_NT)
+  PYTHON = $(PYTHON_ENV)/Scripts/python
+  PIP = $(PYTHON_ENV)/Scripts/pip
+endif
+
 # Default command to install all dependencies
 .PHONY: all install
 all: install
