@@ -33,7 +33,12 @@ install-backend:
 # Frontend setup - Install Node.js dependencies
 .PHONY: install-frontend
 install-frontend:
-	cd frontend && $(NPM) install
+	@if [ -d "src" ]; then \
+		cd src && $(NPM) install; \
+	else \
+		echo "src directory not found! Please ensure it exists."; \
+		exit 1; \
+	fi
 
 # Run the backend Flask app
 .PHONY: run-backend
@@ -43,9 +48,9 @@ run-backend:
 # Run the frontend app (assuming a React app)
 .PHONY: run-frontend
 run-frontend:
-	cd frontend && $(NPM) start
+	cd src && $(NPM) start
 
 # Clean up virtual environment and node_modules
 .PHONY: clean
 clean:
-	rm -rf $(PYTHON_ENV) frontend/node_modules
+	rm -rf $(PYTHON_ENV) src/node_modules
