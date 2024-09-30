@@ -21,11 +21,14 @@ install: install-backend install-frontend
 .PHONY: install-backend
 install-backend:
 	# Create a Python virtual environment if it doesn't exist (cross-platform)
-	if [ ! -d "$(PYTHON_ENV)" ]; then \
-		cd api && python3 -m venv venv && \
-		$(PIP) install --upgrade pip && \
-		$(PIP) install -r requirements.txt; \
+	@if [ ! -d "$(PYTHON_ENV)" ]; then \
+		echo "Creating virtual environment..."; \
+		cd api && python3 -m venv venv; \
 	fi
+	@echo "Upgrading pip..."; \
+	$(PIP) install --upgrade pip; \
+	@echo "Installing requirements..."; \
+	$(PIP) install -r api/requirements.txt
 
 # Frontend setup - Install Node.js dependencies
 .PHONY: install-frontend
