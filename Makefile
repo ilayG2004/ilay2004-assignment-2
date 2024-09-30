@@ -1,12 +1,15 @@
 # Define variables for Python virtual environment and Node.js
 PYTHON_ENV = api/venv
-PYTHON = $(PYTHON_ENV)/bin/python  # Unix-compatible path
-PIP = $(PYTHON_ENV)/bin/pip        # Unix-compatible path
+PYTHON = $(PYTHON_ENV)/bin/python
+PIP = $(PYTHON_ENV)/bin/pip
 NPM = npm
 
 # Default command to install all dependencies
-.PHONY: all
-all: install-backend install-frontend
+.PHONY: all install
+all: install
+
+# Install all dependencies (backend and frontend)
+install: install-backend install-frontend
 
 # Backend setup - Create virtual environment and install dependencies
 .PHONY: install-backend
